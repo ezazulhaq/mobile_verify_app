@@ -19,10 +19,7 @@ class LoginScreen extends StatelessWidget {
       controller: phoneController,
       hintText: "Phone Number",
       buttonLabel: "SEND",
-      press: () {
-        print(phoneController.text);
-        currentState = MobileVerificationState.SHOW_MOBILE_FORM_SATE;
-      },
+      state: currentState,
     );
   }
 
@@ -31,10 +28,7 @@ class LoginScreen extends StatelessWidget {
       controller: otpController,
       hintText: "Enter OTP",
       buttonLabel: "VERIFY",
-      press: () {
-        print(otpController.text);
-        currentState = MobileVerificationState.SHOW_OTP_FORM_STATE;
-      },
+      state: currentState,
     );
   }
 

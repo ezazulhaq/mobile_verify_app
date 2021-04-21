@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mobil_verify_app/screens/home_screen.dart';
 import 'package:mobil_verify_app/screens/login_screen.dart';
 
 void main() async {
@@ -17,7 +19,42 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: InitializerWidget(),
     );
+  }
+}
+
+class InitializerWidget extends StatefulWidget {
+  InitializerWidget({Key? key}) : super(key: key);
+
+  @override
+  _InitializerWidgetState createState() => _InitializerWidgetState();
+}
+
+class _InitializerWidgetState extends State<InitializerWidget> {
+  FirebaseAuth? _auth;
+  User? _user;
+
+  bool showLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _auth = FirebaseAuth.instance;
+    _user = _auth!.currentUser;
+    showLoading = false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return showLoading
+        ? Container(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          )
+        : _user == null
+            ? LoginScreen()
+            : HomeScreen();
   }
 }

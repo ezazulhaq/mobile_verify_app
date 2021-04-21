@@ -16,7 +16,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: null,
+        child: Center(
+          child: Text("Welcome Back!!!"),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

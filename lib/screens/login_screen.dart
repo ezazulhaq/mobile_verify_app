@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
               codeSent: (verificationId, resendingToken) {
                 setState(() {
                   showLoading = false;
-                  currentState = MobileVerificationState.SHOW_MOBILE_FORM_SATE;
+                  currentState = MobileVerificationState.SHOW_OTP_FORM_STATE;
                   this.verificationId = verificationId;
                 });
               },

@@ -1,3 +1,4 @@
+// @dart = 2.9
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -25,15 +26,15 @@ class MyApp extends StatelessWidget {
 }
 
 class InitializerWidget extends StatefulWidget {
-  InitializerWidget({Key? key}) : super(key: key);
+  InitializerWidget({Key key}) : super(key: key);
 
   @override
   _InitializerWidgetState createState() => _InitializerWidgetState();
 }
 
 class _InitializerWidgetState extends State<InitializerWidget> {
-  FirebaseAuth? _auth;
-  User? _user;
+  FirebaseAuth _auth;
+  User _user;
 
   bool showLoading = true;
 
@@ -41,7 +42,7 @@ class _InitializerWidgetState extends State<InitializerWidget> {
   void initState() {
     super.initState();
     _auth = FirebaseAuth.instance;
-    _user = _auth!.currentUser;
+    _user = _auth.currentUser;
     showLoading = false;
   }
 

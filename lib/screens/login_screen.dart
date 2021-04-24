@@ -1,3 +1,4 @@
+// @dart = 2.9
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobil_verify_app/components/button_widget.dart';
@@ -10,7 +11,7 @@ enum MobileVerificationState {
 
 // ignore: must_be_immutable
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key key}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -26,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   FirebaseAuth _auth = FirebaseAuth.instance;
 
-  String? verificationId;
+  String verificationId;
   bool showLoading = false;
 
   getMobileFormState(BuildContext context) {
@@ -49,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
               showLoading = true;
             });
 
-            String? phoneNum = "+91${phoneController.text}";
+            String phoneNum = "+91${phoneController.text}";
             print(phoneNum);
 
             await _auth.verifyPhoneNumber(
@@ -63,8 +64,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 setState(() {
                   showLoading = false;
                 });
-                _scaffoldKey.currentState!.showSnackBar(
-                    SnackBar(content: Text(verificationFailed.message!)));
+                _scaffoldKey.currentState.showSnackBar(
+                    SnackBar(content: Text(verificationFailed.message)));
               },
               codeSent: (verificationId, resendingToken) {
                 setState(() {
@@ -103,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
           onPressed: () {
             PhoneAuthCredential phoneAuthCredential =
                 PhoneAuthProvider.credential(
-                    verificationId: verificationId!,
+                    verificationId: verificationId,
                     smsCode: otpController.text);
 
             signInWithPhoneAuthCredentials(phoneAuthCredential);
@@ -159,8 +160,8 @@ class _LoginScreenState extends State<LoginScreen> {
         showLoading = false;
       });
 
-      _scaffoldKey.currentState!
-          .showSnackBar(SnackBar(content: Text(e.message!)));
+      _scaffoldKey.currentState
+          .showSnackBar(SnackBar(content: Text(e.message)));
     }
   }
 }
